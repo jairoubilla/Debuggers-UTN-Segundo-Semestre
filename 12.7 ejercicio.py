@@ -1,79 +1,97 @@
-# Clase color
-class Color:
-    def __init__(self, color):
-        self.__color = color
-
-    def get_color(self):
-        return self.__color
-
-#set
-
-    def set_color(self, color):
-        self.__color = color
-
-    def __str__(self):
-        return f'Color: {self.__color}'
-
-# Clase figuraGeometrica
-
+# Clase 9 POO Parte 5
+# 12.2 Creamos las clases padres
 class FiguraGeometrica:
     def __init__(self, ancho, alto):
-        self.__ancho = ancho
-        self.__alto = alto
+        self._ancho = ancho
+        self._alto = alto
 
-    def get_ancho(self):
-        return self.__ancho
-    
-    def get_alto(self):
-        return self.__alto
+    @property
+    def ancho(self):
+        return self._ancho
 
-#set
+    @ancho.setter
+    def ancho(self, ancho):
+        self._ancho = ancho
 
-    def set_ancho(self, ancho):
-        self.__ancho = ancho
+    @property
+    def alto(self):
+        return self._alto
 
-    def set_alto(self, alto):
-        self.__alto = alto
+    @alto.setter
+    def alto(self, alto):
+        self._alto = alto
 
     def __str__(self):
-        return f'FiguraGeometrica Ancho: {self, __ancho} y Alto: {self,__alto}'
+        return f'FiguraGeometrica Ancho: {self._ancho}, Alto: {self._alto}'
 
-# Clase Cuadrado (hereda de FiguraGeometrica y Color)
+# Clase 9 POO Parte 5
+# 12.2 Creamos las clases padres
+class Color:
+    def __init__(self, color):
+        self._color = color
+
+    @property
+    def color(self):
+        return self._color
+
+    @color.setter
+    def color(self, color):
+        self._color = color
+
+    def __str__(self):
+        return f'Color [color: {self._color}]'
+
+# 12.3 Creamos la clase hija Cuadrado
+from FiguraGeometrica import FiguraGeometrica
+from Color import Color
+
 class Cuadrado(FiguraGeometrica, Color):
     def __init__(self, lado, color):
+        #super.__init__(lado)
         FiguraGeometrica.__init__(self, lado, lado)
         Color.__init__(self, color)
 
     def calcular_area(self):
-        return self.get_ancho() * self.get_alto()
+        return self.alto * self.ancho
 
     def __str__(self):
-        return f'Cuadrado [Lado: {self.get_ancho()}, {Color.__str__(self)}, Área: {self.calcular_area()}]'
+        return f'{FiguraGeometrica.__str__(self)} {Color.__str__(self)}'
+
+# 12.8 Tarea 1 y tarea 2 Creación de la clase Rectángulo
+from Color import Color
+from FiguraGeometrica import FiguraGeometrica
 
 
-# Clase Rectangulo (hereda de FiguraGeometrica y Color)
 class Rectangulo(FiguraGeometrica, Color):
     def __init__(self, ancho, alto, color):
         FiguraGeometrica.__init__(self, ancho, alto)
         Color.__init__(self, color)
 
     def calcular_area(self):
-        return self.get_ancho() * self.get_alto()
+        return self.ancho * self.alto
 
     def __str__(self):
-        return f'Rectángulo [Ancho: {self.get_ancho()}, Alto: {self.get_alto()}, {Color.__str__(self)}, Área: {self.calcular_area()}]'
+        return f'{FiguraGeometrica.__str__(self)} {Color.__str__(self)}'
 
 
-# Clase de prueba
-if __name__ == '__main__':
-    print("PRUEBA DE FIGURAS GEOMÉTRICAS")
+# 12.4 Creamos la clase para testear nuestro código
+from Cuadrado import Cuadrado
+from Rectangulo import Rectangulo
 
-    cuadrado1 = Cuadrado(5, "Rojo")
-    cuadrado2 = Cuadrado(10, "Azul")
-    rectangulo1 = Rectangulo(4, 8, "Verde")
-    rectangulo2 = Rectangulo(6, 3, "Amarillo")
+cuadrado1 = Cuadrado(5, 'Azul')
+print(cuadrado1.ancho)
+print(cuadrado1.alto)
+print(f"Cálculo del área del cuadrado: {cuadrado1.calcular_area()}")
 
-    figuras = [cuadrado1, cuadrado2, rectangulo1, rectangulo2]
+# 12.6 Metodo MRO: Method Resolution Order
+# MRO = Method Resolution Order
+print(Cuadrado.mro())
 
-    for figura in figuras:
-        print(figura)
+# 12.8 Tarea 1 y tarea 2 Creación de la clase Rectángulo
+print(cuadrado1)
+
+rectangulo1 = Rectangulo(3, 8, 'verde')
+print(f'El calculo del area del rectangulo: {rectangulo1.calcular_area()}')
+print(rectangulo1)
+
+
