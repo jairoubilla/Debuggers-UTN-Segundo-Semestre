@@ -9,110 +9,56 @@ La formula es: volumen = ancho * alto * profundidad
 
 */
 
-package proyectoCaja;
+package caja;
 
-import java.util.Scanner;
-import javax.swing.JOptionPane;
+public class Caja {
 
-public class proyectoCaja {
+    //Atributos
+    int ancho;
+    int alto;
+    int profundo;
+
+    //Constructor1
+    public Caja() { // Vacio
+
+    }
+
+    //Constructor2
+    public Caja(int ancho, int alto, int profundo) { // Parametros
+        this.ancho = ancho;
+        this.alto = alto;
+        this.profundo = profundo;
+    }
+
+    //Metodo para calcular
+    public int calcularVolumen(){
+        return ancho * alto * profundo ;
+    }
+}
+
+package caja;
+
+public class PruebaCaja {
+
     public static void main(String[] args) {
+        //Variables
+        int medAncho = 5;
+        int medAlto = 8;
+        int medProfundidad = 4;
 
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
+        //Constructor vacio, le pasamos valores
+        Caja cajita = new Caja(); // Creamos objeto
+        cajita.ancho = medAncho;
+        cajita.alto = medAlto;
+        cajita.profundo = medProfundidad;
 
-        do {
-            System.out.println("\nMenú de opciones Proyecto Caja");
-            System.out.println("1) Usando Scanner");
-            System.out.println("2) Usando JOptionPane");
-            System.out.println("0) Salir");
-            System.out.print("\nSeleccione una opción: ");
+        //Metodo, Calculo1
+        int resultado = cajita.calcularVolumen();
+        System.out.println("Volumen de la cajita: " + resultado);
 
-            opcion = Integer.parseInt(scanner.nextLine());
+        // Constructor 2, calculo 2
+        Caja cajita1 = new Caja(5, 5, 5);
+        System.out.println("Volumen cajita2: " + cajita1.calcularVolumen());
 
-            switch (opcion) {
-                case 1:
-                    usandoScanner(scanner);
-                    break;
-                case 2:
-                    usandoJOptionPane();
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Opción no válida");
-                    break;
-            }
-        } while (opcion != 0);
-    }
-    
-// Usando Scanner
-    public static void usandoScanner(Scanner scanner) {
-        double ancho;
-        do {
-            System.out.print("\nIngrese el ancho: ");
-            ancho = Double.parseDouble(scanner.nextLine());
-            if (ancho <= 0) {
-                System.out.println("Error: El ancho no puede ser 0.");
-            }
-        } while (ancho <= 0);
-        
-        double alto;
-        do {
-            System.out.print("Ingrese el alto: ");
-            alto = Double.parseDouble(scanner.nextLine());
-            if (alto <= 0) {
-                System.out.println("Error: El alto no puede ser 0.");
-            }
-        } while (alto <= 0);
-
-        double profundidad;
-        do {
-            System.out.print("Ingrese la profundidad: ");
-            profundidad = Double.parseDouble(scanner.nextLine());
-            if (profundidad <= 0) {
-                System.out.println("Error: La profundidad no puede ser 0.");
-            }
-        } while (profundidad <= 0);
-        
-        System.out.println("\nEl volumen es: " + (alto * ancho * profundidad));
-        
-    }
-
-// Usando JOptionPane 
-    public static void usandoJOptionPane() {
-        String entrada;
-        double alto, ancho, profundidad;
-        
-        do {
-            entrada = JOptionPane.showInputDialog(
-                null,
-                "Ingrese el ancho:",
-                "Ancho",
-                JOptionPane.QUESTION_MESSAGE
-            );
-            ancho = Double.parseDouble(entrada);
-        } while (ancho <= 0);
-        
-        do {
-            entrada = JOptionPane.showInputDialog(
-                null,
-                "Ingrese el alto:",
-                "Alto",
-                JOptionPane.QUESTION_MESSAGE
-            );
-            alto = Double.parseDouble(entrada);
-        } while (alto <= 0);
-            
-        do {
-            entrada = JOptionPane.showInputDialog(
-                null,
-                "Ingrese la profundidad:",
-                "Profundidad",
-                JOptionPane.QUESTION_MESSAGE
-            );
-            profundidad = Double.parseDouble(entrada);
-        } while (profundidad <= 0);
-        
-    JOptionPane.showMessageDialog(null, "La volumen es: " + (alto * ancho * profundidad));
     }
 }
